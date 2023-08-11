@@ -1,0 +1,46 @@
+function editUserData(event) {
+    event.preventDefault();
+    const userId = event.target.editUserId.value;
+    const name = event.target.username.value;
+    const email = event.target.emailId.value;
+    const phonenumber = event.target.phonenumber.value;
+
+    const obj = {
+        name,
+        email,
+        phonenumber
+    };
+
+    const url = `https://crudcrud.com/api/538d1288ac4f419b9c1520f0b5f9db38/appointmentdata/${userId}`;
+
+    axios.put(url, obj)
+        .then((response) => {
+            console.log('User details updated:', response);
+            showUserOnScreen(obj);
+        })
+        .catch((err) => {
+            console.error('Error updating user details:', err);
+        });
+}
+
+// ... (DOMContentLoaded event listener remains unchanged) ...
+</script>
+</body>
+</html>
+In this code, the populateEditForm function populates the main registration form with user details for editing. The editUserData function handles the form submission for editing user details. When the form is submitted, a PUT request is sent to the server to update the user's information. If the request is successful, the user details on the website are updated accordingly using the showUserOnScreen function.
+
+Make sure to include an additional input field in your HTML form to store the _id of the user being edited:
+
+html
+Copy code
+<form onsubmit="editUserData(event)">
+<!-- ... (other input fields) ... -->
+<input type="hidden" id="editUserId" name="editUserId">
+<button>Submit</button>
+</form>
+This hidden input field will hold the _id of the user being edited, which will be used in the editUserData function to construct the PUT request URL.
+
+
+
+
+
